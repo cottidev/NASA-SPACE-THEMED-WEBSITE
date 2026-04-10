@@ -1,0 +1,1564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NASA</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800&family=Barlow:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="main.js"></script>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-to-top" id="back-to-top" title="Back to top">↑</button>
+
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+      ☀
+    </button>
+
+    <!-- SPACE QUIZ MODAL -->
+    <div class="quiz-modal" id="quiz-modal">
+      <div class="quiz-inner">
+        <button class="quiz-close" id="quiz-close">✕</button>
+        <div class="quiz-label">NASA Space Quiz</div>
+        <div class="quiz-question" id="quiz-question">Loading...</div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div class="quiz-result" id="quiz-result"></div>
+        <div class="quiz-score" id="quiz-score">Score: 0 / 0</div>
+        <button class="quiz-next" id="quiz-next" style="display: none">
+          Next Question →
+        </button>
+      </div>
+    </div>
+
+    <!-- QUIZ TRIGGER BUTTON (fixed bottom-left) -->
+    <button class="quiz-trigger" id="quiz-trigger">🚀 Space Quiz</button>
+
+    <!-- COUNTDOWN MODAL -->
+    <div class="countdown-bar" id="countdown-bar">
+      <div class="countdown-label">⏱ Next NASA Launch</div>
+      <div class="countdown-mission">Artemis III · Lunar Landing</div>
+      <div class="countdown-timer">
+        <div class="cd-unit"><span id="cd-days">--</span><em>Days</em></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span id="cd-hours">--</span><em>Hrs</em></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span id="cd-mins">--</span><em>Min</em></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><span id="cd-secs">--</span><em>Sec</em></div>
+      </div>
+    </div>
+
+    <canvas id="starfield"></canvas>
+
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="nav-logo">
+        <div class="nasa-meatball">NASA</div>
+        <div class="nav-brand-text">
+          <span>NASA</span>
+          <span>National Aeronautics and Space Administration</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#missions">Missions</a></li>
+        <li><a href="#explore">Explore</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#apod">APOD</a></li>
+        <li><a href="#" class="nav-cta">Watch Live</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Mission Status: Active</div>
+        <h1>
+          <span class="line-main">Exploring the</span>
+          <span class="line-accent">Universe</span>
+          <span class="line-sub">Est. 1958 · Washington, D.C.</span>
+        </h1>
+        <p class="hero-desc">
+          For more than six decades, NASA has led the world in space
+          exploration, pushing the boundaries of science, technology, and human
+          achievement — from the lunar surface to the outer planets.
+        </p>
+        <div class="hero-buttons">
+          <a href="#missions" class="btn-primary">
+            &#11835; View Active Missions
+          </a>
+          <a href="#apod" class="btn-secondary">
+            &#9733; Today's Astronomy Photo
+          </a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </div>
+
+    <!-- ISS TRACKER BAR -->
+    <div class="iss-bar">
+      <div class="iss-dot"></div>
+      <span class="iss-label">ISS Live Telemetry</span>
+      <div class="iss-sep"></div>
+      <span class="iss-data">Altitude: <b>408 km</b></span>
+      <div class="iss-sep"></div>
+      <span class="iss-data">Speed: <b>27,600 km/h</b></span>
+      <div class="iss-sep"></div>
+      <span class="iss-data">Crew: <b>7 Astronauts</b></span>
+      <div class="iss-sep"></div>
+      <span class="iss-data">Orbit: <b id="orbit-count">32,847</b></span>
+    </div>
+
+    <!-- TICKER -->
+    <div class="ticker">
+      <div class="ticker-inner" id="ticker-inner">
+        <div class="ticker-item">Artemis III: Human Lunar Landing 2026</div>
+        <div class="ticker-item">
+          James Webb Space Telescope: Deep Field Images Released
+        </div>
+        <div class="ticker-item">
+          Perseverance Rover: Organic Molecule Detection Confirmed
+        </div>
+        <div class="ticker-item">
+          Europa Clipper: En Route to Jupiter's Moon
+        </div>
+        <div class="ticker-item">
+          OSIRIS-APEX: Arriving at Apophis Asteroid 2029
+        </div>
+        <div class="ticker-item">Voyager 1: 23 Billion km from Earth</div>
+        <div class="ticker-item">Artemis III: Human Lunar Landing 2026</div>
+        <div class="ticker-item">
+          James Webb Space Telescope: Deep Field Images Released
+        </div>
+        <div class="ticker-item">
+          Perseverance Rover: Organic Molecule Detection Confirmed
+        </div>
+        <div class="ticker-item">
+          Europa Clipper: En Route to Jupiter's Moon
+        </div>
+        <div class="ticker-item">
+          OSIRIS-APEX: Arriving at Apophis Asteroid 2029
+        </div>
+        <div class="ticker-item">Voyager 1: 23 Billion km from Earth</div>
+      </div>
+    </div>
+
+    <!-- MISSIONS SECTION -->
+    <section id="missions">
+      <div class="missions-header">
+        <div>
+          <div class="section-label">Active Programs</div>
+          <h2 class="section-title">Current<br />Missions</h2>
+        </div>
+        <p class="section-desc">
+          From the lunar surface to the outer solar system, NASA's fleet of
+          spacecraft and rovers are discovering new frontiers every day.
+        </p>
+      </div>
+
+      <div class="missions-grid">
+        <!-- Artemis -->
+        <div class="mission-card large">
+          <div class="mission-card-inner">
+            <svg
+              class="mission-visual"
+              viewBox="0 0 400 500"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <radialGradient id="moonGrad" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#c8d4e0" />
+                  <stop offset="100%" stop-color="#2a3a50" />
+                </radialGradient>
+                <radialGradient id="moonGlow" cx="30%" cy="30%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="transparent" />
+                </radialGradient>
+              </defs>
+              <rect width="400" height="500" fill="#000814" />
+              <circle cx="200" cy="350" r="300" fill="url(#moonGrad)" />
+              <circle cx="200" cy="350" r="300" fill="url(#moonGlow)" />
+              <!-- craters -->
+              <circle
+                cx="120"
+                cy="280"
+                r="18"
+                fill="none"
+                stroke="#1a2a3a"
+                stroke-width="2"
+                opacity="0.6"
+              />
+              <circle
+                cx="280"
+                cy="310"
+                r="12"
+                fill="none"
+                stroke="#1a2a3a"
+                stroke-width="2"
+                opacity="0.6"
+              />
+              <circle
+                cx="200"
+                cy="260"
+                r="8"
+                fill="none"
+                stroke="#1a2a3a"
+                stroke-width="2"
+                opacity="0.6"
+              />
+              <!-- rocket -->
+              <g transform="translate(190, 80)">
+                <rect
+                  x="0"
+                  y="20"
+                  width="20"
+                  height="60"
+                  fill="#e8f4fd"
+                  rx="1"
+                />
+                <polygon points="10,0 0,20 20,20" fill="#fc3d21" />
+                <rect
+                  x="-12"
+                  y="40"
+                  width="10"
+                  height="30"
+                  fill="#b8d4ea"
+                  rx="1"
+                />
+                <rect
+                  x="22"
+                  y="40"
+                  width="10"
+                  height="30"
+                  fill="#b8d4ea"
+                  rx="1"
+                />
+                <rect x="2" y="72" width="6" height="14" fill="#888" rx="1" />
+                <rect x="12" y="72" width="6" height="14" fill="#888" rx="1" />
+                <!-- exhaust -->
+                <ellipse
+                  cx="5"
+                  cy="90"
+                  rx="3"
+                  ry="8"
+                  fill="#fc8c3d"
+                  opacity="0.7"
+                />
+                <ellipse
+                  cx="15"
+                  cy="90"
+                  rx="3"
+                  ry="8"
+                  fill="#fc8c3d"
+                  opacity="0.7"
+                />
+                <ellipse
+                  cx="5"
+                  cy="96"
+                  rx="2"
+                  ry="6"
+                  fill="#ffd60a"
+                  opacity="0.5"
+                />
+                <ellipse
+                  cx="15"
+                  cy="96"
+                  rx="2"
+                  ry="6"
+                  fill="#ffd60a"
+                  opacity="0.5"
+                />
+              </g>
+              <!-- stars -->
+              <circle cx="40" cy="40" r="1" fill="white" opacity="0.8" />
+              <circle cx="80" cy="20" r="1.5" fill="white" opacity="0.9" />
+              <circle cx="340" cy="60" r="1" fill="white" opacity="0.7" />
+              <circle cx="360" cy="30" r="2" fill="white" opacity="0.6" />
+              <circle cx="310" cy="80" r="1" fill="white" opacity="0.8" />
+              <circle cx="50" cy="130" r="1" fill="white" opacity="0.5" />
+              <circle cx="370" cy="150" r="1.5" fill="white" opacity="0.7" />
+            </svg>
+            <div class="mission-overlay">
+              <div class="mission-badge">Active · 2026</div>
+              <div class="mission-name">Artemis Program</div>
+              <div class="mission-detail">Return to the Moon — and beyond</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- James Webb -->
+        <div class="mission-card medium">
+          <div class="mission-card-inner">
+            <svg
+              class="mission-visual"
+              viewBox="0 0 400 400"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <radialGradient id="nebulaGrad" cx="40%" cy="60%">
+                  <stop offset="0%" stop-color="#7b2d8b" stop-opacity="0.8" />
+                  <stop offset="40%" stop-color="#0077b6" stop-opacity="0.5" />
+                  <stop offset="100%" stop-color="#000814" stop-opacity="1" />
+                </radialGradient>
+              </defs>
+              <rect width="400" height="400" fill="#000814" />
+              <ellipse
+                cx="180"
+                cy="220"
+                rx="200"
+                ry="150"
+                fill="url(#nebulaGrad)"
+              />
+              <ellipse
+                cx="250"
+                cy="160"
+                rx="120"
+                ry="80"
+                fill="#0077b6"
+                opacity="0.2"
+              />
+              <!-- stars scattered -->
+              <circle cx="60" cy="50" r="1.5" fill="white" opacity="0.9" />
+              <circle cx="120" cy="30" r="1" fill="white" opacity="0.7" />
+              <circle cx="200" cy="60" r="2" fill="white" opacity="0.9" />
+              <circle cx="300" cy="40" r="1" fill="white" opacity="0.6" />
+              <circle cx="350" cy="80" r="1.5" fill="white" opacity="0.8" />
+              <circle cx="80" cy="150" r="1" fill="white" opacity="0.5" />
+              <circle cx="330" cy="200" r="1" fill="white" opacity="0.7" />
+              <circle cx="40" cy="300" r="1.5" fill="white" opacity="0.6" />
+              <!-- JWST telescope body -->
+              <g transform="translate(180, 120) rotate(-20)">
+                <rect
+                  x="-30"
+                  y="-8"
+                  width="60"
+                  height="16"
+                  fill="#c8d4e0"
+                  rx="2"
+                />
+                <rect
+                  x="-6"
+                  y="-30"
+                  width="12"
+                  height="22"
+                  fill="#a0b4c8"
+                  rx="1"
+                />
+                <rect
+                  x="-50"
+                  y="-20"
+                  width="18"
+                  height="10"
+                  fill="#7b8fa0"
+                  rx="1"
+                />
+                <rect
+                  x="32"
+                  y="-20"
+                  width="18"
+                  height="10"
+                  fill="#7b8fa0"
+                  rx="1"
+                />
+                <!-- mirror hexagons -->
+                <g fill="#ffd60a" opacity="0.8">
+                  <polygon
+                    points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7"
+                    transform="translate(-28,0)"
+                  />
+                  <polygon
+                    points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7"
+                    transform="translate(0,0)"
+                  />
+                  <polygon
+                    points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7"
+                    transform="translate(28,0)"
+                  />
+                </g>
+                <line
+                  x1="-28"
+                  y1="8"
+                  x2="-28"
+                  y2="30"
+                  stroke="#ffd60a"
+                  stroke-width="1"
+                  opacity="0.5"
+                />
+                <line
+                  x1="0"
+                  y1="8"
+                  x2="0"
+                  y2="30"
+                  stroke="#ffd60a"
+                  stroke-width="1"
+                  opacity="0.5"
+                />
+                <line
+                  x1="28"
+                  y1="8"
+                  x2="28"
+                  y2="30"
+                  stroke="#ffd60a"
+                  stroke-width="1"
+                  opacity="0.5"
+                />
+              </g>
+            </svg>
+            <div class="mission-overlay">
+              <div class="mission-badge">Operational</div>
+              <div class="mission-name">James Webb Telescope</div>
+              <div class="mission-detail">
+                Peering 13.6 billion years back in time
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perseverance -->
+        <div class="mission-card small">
+          <div class="mission-card-inner">
+            <svg
+              class="mission-visual"
+              viewBox="0 0 300 300"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="marsGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#c0392b" />
+                  <stop offset="100%" stop-color="#7d1d0f" />
+                </linearGradient>
+              </defs>
+              <rect width="300" height="300" fill="#1a0800" />
+              <!-- Mars sky -->
+              <rect width="300" height="180" fill="#8b3a2a" opacity="0.3" />
+              <!-- Mars ground -->
+              <ellipse
+                cx="150"
+                cy="220"
+                rx="200"
+                ry="80"
+                fill="url(#marsGrad)"
+              />
+              <!-- rocks -->
+              <ellipse cx="60" cy="210" rx="20" ry="10" fill="#9b4030" />
+              <ellipse cx="250" cy="215" rx="15" ry="7" fill="#9b4030" />
+              <ellipse cx="200" cy="205" rx="10" ry="5" fill="#7d2e20" />
+              <!-- Rover body -->
+              <g transform="translate(130, 165)">
+                <rect
+                  x="-20"
+                  y="-15"
+                  width="40"
+                  height="20"
+                  fill="#c8c8b8"
+                  rx="2"
+                />
+                <rect
+                  x="-8"
+                  y="-22"
+                  width="16"
+                  height="10"
+                  fill="#a0a090"
+                  rx="1"
+                />
+                <!-- wheels -->
+                <circle
+                  cx="-22"
+                  cy="10"
+                  r="8"
+                  fill="#555"
+                  stroke="#888"
+                  stroke-width="1"
+                />
+                <circle
+                  cx="22"
+                  cy="10"
+                  r="8"
+                  fill="#555"
+                  stroke="#888"
+                  stroke-width="1"
+                />
+                <circle cx="-22" cy="10" r="3" fill="#888" />
+                <circle cx="22" cy="10" r="3" fill="#888" />
+                <!-- arm -->
+                <line
+                  x1="0"
+                  y1="-15"
+                  x2="30"
+                  y2="-30"
+                  stroke="#888"
+                  stroke-width="2"
+                />
+                <circle cx="30" cy="-30" r="4" fill="#666" />
+                <!-- mast/camera -->
+                <line
+                  x1="-2"
+                  y1="-22"
+                  x2="-2"
+                  y2="-40"
+                  stroke="#888"
+                  stroke-width="2"
+                />
+                <rect x="-7" y="-45" width="10" height="6" fill="#333" rx="1" />
+              </g>
+              <!-- dust -->
+              <circle cx="180" cy="240" r="2" fill="#c0392b" opacity="0.3" />
+              <circle cx="100" cy="235" r="1.5" fill="#c0392b" opacity="0.2" />
+            </svg>
+            <div class="mission-overlay">
+              <div class="mission-badge">Mars · Active</div>
+              <div class="mission-name">Perseverance</div>
+              <div class="mission-detail">Jezero Crater</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Europa Clipper -->
+        <div class="mission-card small">
+          <div class="mission-card-inner">
+            <svg
+              class="mission-visual"
+              viewBox="0 0 300 300"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <radialGradient id="europaGrad" cx="40%" cy="40%">
+                  <stop offset="0%" stop-color="#c8dff0" />
+                  <stop offset="60%" stop-color="#8fb8d8" />
+                  <stop offset="100%" stop-color="#4a7fa0" />
+                </radialGradient>
+              </defs>
+              <rect width="300" height="300" fill="#000420" />
+              <!-- Jupiter in background -->
+              <circle cx="260" cy="80" r="120" fill="#c8a460" opacity="0.15" />
+              <ellipse
+                cx="260"
+                cy="60"
+                rx="120"
+                ry="8"
+                fill="#a07840"
+                opacity="0.1"
+              />
+              <ellipse
+                cx="260"
+                cy="80"
+                rx="120"
+                ry="6"
+                fill="#c8a460"
+                opacity="0.1"
+              />
+              <!-- Europa moon -->
+              <circle cx="130" cy="160" r="80" fill="url(#europaGrad)" />
+              <!-- Surface cracks -->
+              <line
+                x1="80"
+                y1="130"
+                x2="180"
+                y2="200"
+                stroke="#5a8aaa"
+                stroke-width="2"
+                opacity="0.6"
+              />
+              <line
+                x1="100"
+                y1="110"
+                x2="150"
+                y2="220"
+                stroke="#5a8aaa"
+                stroke-width="1.5"
+                opacity="0.5"
+              />
+              <line
+                x1="60"
+                y1="170"
+                x2="200"
+                y2="150"
+                stroke="#4a7a9a"
+                stroke-width="1"
+                opacity="0.4"
+              />
+              <!-- Stars -->
+              <circle cx="30" cy="30" r="1" fill="white" opacity="0.8" />
+              <circle cx="250" cy="200" r="1.5" fill="white" opacity="0.6" />
+              <circle cx="280" cy="250" r="1" fill="white" opacity="0.7" />
+              <circle cx="20" cy="250" r="1" fill="white" opacity="0.5" />
+            </svg>
+            <div class="mission-overlay">
+              <div class="mission-badge">En Route · 2030</div>
+              <div class="mission-name">Europa Clipper</div>
+              <div class="mission-detail">Jupiter's icy ocean moon</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Voyager -->
+        <div class="mission-card medium">
+          <div class="mission-card-inner">
+            <svg
+              class="mission-visual"
+              viewBox="0 0 400 400"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="400" height="400" fill="#000" />
+              <!-- Milky way swirl -->
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="280"
+                ry="120"
+                fill="#0b1a3a"
+                opacity="0.8"
+                transform="rotate(-20, 200, 200)"
+              />
+              <ellipse
+                cx="200"
+                cy="200"
+                rx="200"
+                ry="80"
+                fill="#1a2a5a"
+                opacity="0.5"
+                transform="rotate(-20, 200, 200)"
+              />
+              <!-- Stars -->
+              <circle cx="50" cy="50" r="2" fill="white" opacity="0.9" />
+              <circle cx="150" cy="30" r="1" fill="white" opacity="0.7" />
+              <circle cx="300" cy="60" r="1.5" fill="white" opacity="0.8" />
+              <circle cx="370" cy="100" r="1" fill="white" opacity="0.6" />
+              <circle cx="80" cy="200" r="1" fill="white" opacity="0.5" />
+              <circle cx="340" cy="280" r="2" fill="white" opacity="0.7" />
+              <circle cx="20" cy="340" r="1" fill="white" opacity="0.6" />
+              <circle cx="380" cy="350" r="1.5" fill="white" opacity="0.5" />
+              <!-- Voyager spacecraft -->
+              <g transform="translate(200, 200)">
+                <line
+                  x1="-80"
+                  y1="0"
+                  x2="80"
+                  y2="0"
+                  stroke="#c8d4e0"
+                  stroke-width="1.5"
+                />
+                <circle
+                  cx="0"
+                  cy="0"
+                  r="12"
+                  fill="#7090a0"
+                  stroke="#c8d4e0"
+                  stroke-width="1"
+                />
+                <rect
+                  x="-4"
+                  y="-4"
+                  width="8"
+                  height="8"
+                  fill="#a0b4c0"
+                  rx="1"
+                />
+                <!-- dish -->
+                <ellipse
+                  cx="0"
+                  cy="-20"
+                  rx="22"
+                  ry="5"
+                  fill="#c8d4e0"
+                  stroke="#888"
+                  stroke-width="0.5"
+                />
+                <line
+                  x1="0"
+                  y1="-15"
+                  x2="0"
+                  y2="-20"
+                  stroke="#888"
+                  stroke-width="1"
+                />
+                <!-- RTG booms -->
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="-60"
+                  y2="40"
+                  stroke="#888"
+                  stroke-width="1"
+                />
+                <rect x="-70" y="35" width="14" height="6" fill="#555" rx="1" />
+              </g>
+              <!-- trajectory line -->
+              <path
+                d="M 200 200 Q 350 100 390 20"
+                stroke="#ffd60a"
+                stroke-width="1"
+                stroke-dasharray="4,6"
+                fill="none"
+                opacity="0.4"
+              />
+            </svg>
+            <div class="mission-overlay">
+              <div class="mission-badge">Interstellar · 1977</div>
+              <div class="mission-name">Voyager 1</div>
+              <div class="mission-detail">
+                23 billion km from Earth — still transmitting
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <div class="stats-band">
+      <div class="stats-inner">
+        <div class="stat-item">
+          <div class="stat-number">72<span>+</span></div>
+          <div class="stat-label">Active Spacecraft</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">18<span>k</span></div>
+          <div class="stat-label">Employees</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">65<span>yrs</span></div>
+          <div class="stat-label">Exploring Space</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">$<span>25B</span></div>
+          <div class="stat-label">Annual Budget</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURE: ARTEMIS -->
+    <div class="feature-section">
+      <div class="feature-visual">
+        <svg
+          viewBox="0 0 500 500"
+          xmlns="http://www.w3.org/2000/svg"
+          style="width: 100%; height: 100%"
+        >
+          <defs>
+            <radialGradient id="lunarGrad" cx="35%" cy="35%">
+              <stop offset="0%" stop-color="#d8e8f0" />
+              <stop offset="50%" stop-color="#8090a0" />
+              <stop offset="100%" stop-color="#101828" />
+            </radialGradient>
+            <radialGradient id="earthGlow" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#1a6090" />
+              <stop offset="60%" stop-color="#0a3060" />
+              <stop offset="100%" stop-color="#000" />
+            </radialGradient>
+          </defs>
+          <rect width="500" height="500" fill="#000814" />
+          <!-- Stars -->
+          <circle cx="30" cy="50" r="1" fill="white" opacity="0.7" />
+          <circle cx="100" cy="20" r="1.5" fill="white" opacity="0.9" />
+          <circle cx="450" cy="30" r="1" fill="white" opacity="0.6" />
+          <circle cx="480" cy="100" r="1" fill="white" opacity="0.8" />
+          <circle cx="20" cy="200" r="1" fill="white" opacity="0.5" />
+          <circle cx="470" cy="400" r="1.5" fill="white" opacity="0.7" />
+          <circle cx="50" cy="450" r="1" fill="white" opacity="0.6" />
+          <circle cx="400" cy="480" r="1" fill="white" opacity="0.5" />
+          <!-- Moon surface at bottom -->
+          <ellipse cx="250" cy="550" rx="420" ry="200" fill="url(#lunarGrad)" />
+          <!-- Craters -->
+          <circle
+            cx="150"
+            cy="430"
+            r="30"
+            fill="none"
+            stroke="#4a5a6a"
+            stroke-width="2"
+            opacity="0.5"
+          />
+          <circle
+            cx="350"
+            cy="460"
+            r="20"
+            fill="none"
+            stroke="#4a5a6a"
+            stroke-width="1.5"
+            opacity="0.4"
+          />
+          <circle
+            cx="250"
+            cy="400"
+            r="12"
+            fill="none"
+            stroke="#4a5a6a"
+            stroke-width="1"
+            opacity="0.4"
+          />
+          <!-- Earth in top right -->
+          <circle cx="400" cy="100" r="60" fill="url(#earthGlow)" />
+          <!-- Earth continents (rough) -->
+          <g opacity="0.5">
+            <ellipse
+              cx="380"
+              cy="80"
+              rx="18"
+              ry="12"
+              fill="#2a7a40"
+              transform="rotate(-20, 380, 80)"
+            />
+            <ellipse
+              cx="420"
+              cy="110"
+              rx="14"
+              ry="18"
+              fill="#2a7a40"
+              transform="rotate(10, 420, 110)"
+            />
+            <ellipse cx="390" cy="120" rx="10" ry="8" fill="#1a5a30" />
+          </g>
+          <!-- Astronaut silhouette -->
+          <g transform="translate(200, 340)">
+            <!-- suit body -->
+            <ellipse cx="0" cy="0" rx="25" ry="35" fill="#e8f0f8" />
+            <!-- helmet -->
+            <circle cx="0" cy="-40" r="28" fill="#d0dce8" />
+            <circle cx="0" cy="-40" r="22" fill="#1a2a40" opacity="0.8" />
+            <circle cx="6" cy="-44" r="6" fill="#ffd60a" opacity="0.3" />
+            <!-- arms -->
+            <rect
+              x="-45"
+              y="-20"
+              width="18"
+              height="10"
+              fill="#d0dce8"
+              rx="4"
+            />
+            <rect x="27" y="-20" width="18" height="10" fill="#d0dce8" rx="4" />
+            <!-- gloves -->
+            <circle cx="-38" cy="-12" r="7" fill="#c0ccd8" />
+            <circle cx="44" cy="-12" r="7" fill="#c0ccd8" />
+            <!-- legs -->
+            <rect x="-18" y="28" width="14" height="30" fill="#d0dce8" rx="4" />
+            <rect x="4" y="28" width="14" height="30" fill="#d0dce8" rx="4" />
+            <!-- boots -->
+            <ellipse cx="-11" cy="60" rx="10" ry="6" fill="#a0acb8" />
+            <ellipse cx="11" cy="60" rx="10" ry="6" fill="#a0acb8" />
+            <!-- flag -->
+            <line
+              x1="44"
+              y1="-14"
+              x2="44"
+              y2="-55"
+              stroke="#c8c8c8"
+              stroke-width="2"
+            />
+            <rect x="44" y="-55" width="30" height="18" fill="#fc3d21" />
+            <line
+              x1="44"
+              y1="-49"
+              x2="74"
+              y2="-49"
+              stroke="#e8f4fd"
+              stroke-width="2"
+            />
+            <line
+              x1="44"
+              y1="-43"
+              x2="74"
+              y2="-43"
+              stroke="#e8f4fd"
+              stroke-width="2"
+            />
+          </g>
+          <!-- NASA logo on suit -->
+          <circle cx="200" cy="340" r="8" fill="#0B3D91" opacity="0.8" />
+        </svg>
+      </div>
+
+      <div class="feature-text">
+        <div class="section-label">Artemis Program</div>
+        <h2 class="section-title">Back to<br />the Moon</h2>
+        <p class="section-desc">
+          Artemis will land the first woman and first person of color on the
+          lunar surface — establishing a permanent presence and paving the way
+          for human missions to Mars.
+        </p>
+
+        <ul class="feature-list">
+          <li>
+            <div class="icon">🚀</div>
+            <div class="item-text">
+              <div class="item-title">Artemis III · 2026</div>
+              <div class="item-desc">
+                Human lunar landing mission using SpaceX Starship Human Landing
+                System near the lunar south pole.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="icon">🛸</div>
+            <div class="item-text">
+              <div class="item-title">Gateway Station</div>
+              <div class="item-desc">
+                A lunar orbital outpost enabling sustainable exploration and
+                serving as a staging point for deep space missions.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="icon">🔬</div>
+            <div class="item-text">
+              <div class="item-title">Scientific Discovery</div>
+              <div class="item-desc">
+                Studying water ice at the lunar south pole and conducting
+                experiments that will inform our journey to Mars.
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- NEWS -->
+    <section id="news">
+      <div class="section-label">Latest Updates</div>
+      <h2 class="section-title">News &amp;<br />Features</h2>
+
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="news-thumb">
+            <svg
+              viewBox="0 0 400 225"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+            >
+              <defs>
+                <radialGradient id="ng1" cx="30%" cy="50%">
+                  <stop offset="0%" stop-color="#7b2d8b" />
+                  <stop offset="100%" stop-color="#000814" />
+                </radialGradient>
+              </defs>
+              <rect width="400" height="225" fill="url(#ng1)" />
+              <ellipse
+                cx="280"
+                cy="120"
+                rx="150"
+                ry="90"
+                fill="#0077b6"
+                opacity="0.2"
+              />
+              <circle cx="100" cy="80" r="2" fill="white" opacity="0.8" />
+              <circle cx="200" cy="40" r="1.5" fill="white" opacity="0.9" />
+              <circle cx="350" cy="30" r="1" fill="white" opacity="0.7" />
+              <circle cx="380" cy="180" r="1.5" fill="white" opacity="0.6" />
+              <circle cx="20" cy="180" r="1" fill="white" opacity="0.5" />
+              <text
+                x="200"
+                y="120"
+                text-anchor="middle"
+                fill="rgba(255,255,255,0.07)"
+                font-family="Barlow Condensed, sans-serif"
+                font-size="48"
+                font-weight="800"
+              >
+                WEBB
+              </text>
+            </svg>
+          </div>
+          <div class="news-body">
+            <div class="news-cat">James Webb</div>
+            <div class="news-title">
+              Webb Captures Most Distant Galaxy Ever Observed
+            </div>
+            <div class="news-excerpt">
+              The James Webb Space Telescope has identified a galaxy dating to
+              just 290 million years after the Big Bang, setting a new cosmic
+              distance record.
+            </div>
+            <div class="news-meta">April 8, 2026 · Science</div>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-thumb">
+            <svg
+              viewBox="0 0 400 225"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+            >
+              <defs>
+                <linearGradient id="ng2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#8b3a2a" />
+                  <stop offset="100%" stop-color="#1a0800" />
+                </linearGradient>
+              </defs>
+              <rect width="400" height="225" fill="url(#ng2)" />
+              <ellipse
+                cx="200"
+                cy="180"
+                rx="300"
+                ry="80"
+                fill="#c0392b"
+                opacity="0.3"
+              />
+              <circle
+                cx="150"
+                cy="100"
+                r="30"
+                fill="none"
+                stroke="#9b4030"
+                stroke-width="2"
+                opacity="0.4"
+              />
+              <circle
+                cx="300"
+                cy="130"
+                r="15"
+                fill="none"
+                stroke="#9b4030"
+                stroke-width="1.5"
+                opacity="0.3"
+              />
+              <text
+                x="200"
+                y="110"
+                text-anchor="middle"
+                fill="rgba(255,255,255,0.05)"
+                font-family="Barlow Condensed, sans-serif"
+                font-size="60"
+                font-weight="800"
+              >
+                MARS
+              </text>
+            </svg>
+          </div>
+          <div class="news-body">
+            <div class="news-cat">Perseverance</div>
+            <div class="news-title">
+              Rover Detects Complex Organics in Ancient Lake Sediments
+            </div>
+            <div class="news-excerpt">
+              NASA's Perseverance rover has confirmed the presence of complex
+              organic molecules in sedimentary rock samples from Jezero Crater's
+              ancient delta.
+            </div>
+            <div class="news-meta">March 29, 2026 · Astrobiology</div>
+          </div>
+        </div>
+
+        <div class="news-card">
+          <div class="news-thumb">
+            <svg
+              viewBox="0 0 400 225"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+            >
+              <defs>
+                <radialGradient id="ng3" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#0b3d91" />
+                  <stop offset="100%" stop-color="#000" />
+                </radialGradient>
+              </defs>
+              <rect width="400" height="225" fill="url(#ng3)" />
+              <circle cx="200" cy="100" r="70" fill="#1a6090" opacity="0.3" />
+              <circle cx="200" cy="100" r="50" fill="#0a3060" opacity="0.4" />
+              <circle cx="200" cy="100" r="20" fill="#ffd60a" opacity="0.2" />
+              <circle cx="60" cy="40" r="1.5" fill="white" opacity="0.8" />
+              <circle cx="340" cy="60" r="1" fill="white" opacity="0.7" />
+              <circle cx="380" cy="180" r="2" fill="white" opacity="0.6" />
+              <text
+                x="200"
+                y="115"
+                text-anchor="middle"
+                fill="rgba(255,255,255,0.05)"
+                font-family="Barlow Condensed, sans-serif"
+                font-size="48"
+                font-weight="800"
+              >
+                ARTEMIS
+              </text>
+            </svg>
+          </div>
+          <div class="news-body">
+            <div class="news-cat">Artemis</div>
+            <div class="news-title">
+              Artemis III Crew Selection Announced for 2026 Lunar Landing
+            </div>
+            <div class="news-excerpt">
+              NASA has officially announced the four-person crew that will carry
+              out the historic Artemis III mission to the lunar south pole next
+              year.
+            </div>
+            <div class="news-meta">March 14, 2026 · Exploration</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APOD -->
+    <div class="apod-section" id="apod">
+      <div class="apod-inner">
+        <div class="apod-image">
+          <svg
+            viewBox="0 0 500 500"
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+          >
+            <defs>
+              <radialGradient id="apodGrad" cx="50%" cy="50%">
+                <stop offset="0%" stop-color="#7b2d8b" />
+                <stop offset="30%" stop-color="#0077b6" />
+                <stop offset="70%" stop-color="#000814" />
+                <stop offset="100%" stop-color="#000" />
+              </radialGradient>
+              <radialGradient id="starCore" cx="50%" cy="50%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="40%" stop-color="#ffe080" />
+                <stop offset="100%" stop-color="transparent" />
+              </radialGradient>
+            </defs>
+            <rect width="500" height="500" fill="#000" />
+            <ellipse
+              cx="250"
+              cy="280"
+              rx="350"
+              ry="250"
+              fill="url(#apodGrad)"
+            />
+            <ellipse
+              cx="200"
+              cy="200"
+              rx="200"
+              ry="150"
+              fill="#00b4d8"
+              opacity="0.1"
+              transform="rotate(30, 200, 200)"
+            />
+            <!-- Pillars of Creation style structures -->
+            <rect
+              x="180"
+              y="200"
+              width="30"
+              height="180"
+              fill="#3a1a5a"
+              rx="4"
+            />
+            <rect
+              x="220"
+              y="230"
+              width="22"
+              height="150"
+              fill="#2a1040"
+              rx="3"
+            />
+            <rect
+              x="250"
+              y="210"
+              width="28"
+              height="180"
+              fill="#4a2060"
+              rx="4"
+            />
+            <rect
+              x="290"
+              y="240"
+              width="18"
+              height="140"
+              fill="#2a1040"
+              rx="3"
+            />
+            <!-- bright star -->
+            <circle
+              cx="250"
+              cy="180"
+              r="20"
+              fill="url(#starCore)"
+              opacity="0.9"
+            />
+            <line
+              x1="250"
+              y1="140"
+              x2="250"
+              y2="160"
+              stroke="white"
+              stroke-width="1"
+              opacity="0.5"
+            />
+            <line
+              x1="250"
+              y1="200"
+              x2="250"
+              y2="220"
+              stroke="white"
+              stroke-width="1"
+              opacity="0.5"
+            />
+            <line
+              x1="210"
+              y1="180"
+              x2="230"
+              y2="180"
+              stroke="white"
+              stroke-width="1"
+              opacity="0.5"
+            />
+            <line
+              x1="270"
+              y1="180"
+              x2="290"
+              y2="180"
+              stroke="white"
+              stroke-width="1"
+              opacity="0.5"
+            />
+            <!-- scattered stars -->
+            <circle cx="50" cy="50" r="2" fill="white" opacity="0.9" />
+            <circle cx="100" cy="30" r="1" fill="white" opacity="0.7" />
+            <circle cx="400" cy="60" r="1.5" fill="white" opacity="0.8" />
+            <circle cx="460" cy="100" r="1" fill="white" opacity="0.6" />
+            <circle cx="30" cy="400" r="1.5" fill="white" opacity="0.7" />
+            <circle cx="470" cy="420" r="1" fill="white" opacity="0.5" />
+            <circle cx="80" cy="460" r="2" fill="white" opacity="0.8" />
+            <circle cx="420" cy="470" r="1" fill="white" opacity="0.6" />
+            <circle cx="340" cy="30" r="1" fill="white" opacity="0.9" />
+            <circle cx="150" cy="80" r="1.5" fill="white" opacity="0.7" />
+            <!-- APOD watermark -->
+            <text
+              x="20"
+              y="490"
+              fill="rgba(255,255,255,0.15)"
+              font-family="Space Mono, monospace"
+              font-size="11"
+              letter-spacing="2"
+            >
+              APOD · APRIL 10, 2026
+            </text>
+          </svg>
+        </div>
+
+        <div class="apod-info">
+          <div class="apod-date">
+            April 10, 2026 · Astronomy Picture of the Day
+          </div>
+          <h2 class="apod-title">Stellar Nursery<br />in Eagle Nebula</h2>
+          <p class="apod-desc">
+            The iconic Pillars of Creation, imaged here by the James Webb Space
+            Telescope in near-infrared light, reveal newborn stars emerging from
+            dense columns of gas and dust. The tallest pillar stretches
+            approximately four light-years — roughly the distance from our Sun
+            to the nearest star system. This region, located 6,500 light-years
+            away in the Eagle Nebula (M16), continues to be one of the most
+            studied stellar nurseries in our galaxy.
+          </p>
+          <div
+            style="margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap"
+          >
+            <a
+              href="#"
+              class="btn-primary"
+              style="font-size: 12px; padding: 12px 24px"
+              >Download Full Res</a
+            >
+            <a
+              href="#"
+              class="btn-secondary"
+              style="font-size: 12px; padding: 12px 24px"
+              >View Archive</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPLORE -->
+    <section id="explore">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          margin-bottom: 0;
+          flex-wrap: wrap;
+          gap: 20px;
+        "
+      >
+        <div>
+          <div class="section-label">Topics</div>
+          <h2 class="section-title">Explore<br />NASA</h2>
+        </div>
+        <p class="section-desc" style="margin-bottom: 0">
+          Dive into the science, technology, and wonder driving humanity's
+          greatest adventure.
+        </p>
+      </div>
+
+      <div class="explore-grid">
+        <div class="explore-card">
+          <svg
+            class="explore-bg"
+            viewBox="0 0 200 280"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <rect width="200" height="280" fill="#000814" />
+            <circle cx="100" cy="100" r="80" fill="#1a3060" opacity="0.6" />
+            <circle cx="100" cy="100" r="50" fill="#0b3d91" opacity="0.4" />
+            <text
+              x="100"
+              y="110"
+              text-anchor="middle"
+              fill="rgba(255,255,255,0.05)"
+              font-family="Barlow Condensed"
+              font-size="42"
+              font-weight="800"
+            >
+              SOL
+            </text>
+            <circle cx="40" cy="40" r="1" fill="white" opacity="0.7" />
+            <circle cx="160" cy="30" r="1.5" fill="white" opacity="0.8" />
+            <circle cx="180" cy="200" r="1" fill="white" opacity="0.6" />
+          </svg>
+          <div class="explore-overlay">
+            <div class="explore-icon">☀️</div>
+            <div class="explore-title">Solar System</div>
+            <div class="explore-sub">8 planets, 200+ moons</div>
+          </div>
+        </div>
+
+        <div class="explore-card">
+          <svg
+            class="explore-bg"
+            viewBox="0 0 200 280"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <rect width="200" height="280" fill="#0a0010" />
+            <ellipse
+              cx="100"
+              cy="150"
+              rx="160"
+              ry="120"
+              fill="#3a0a4a"
+              opacity="0.5"
+            />
+            <circle cx="100" cy="140" r="2.5" fill="white" />
+            <circle
+              cx="100"
+              cy="140"
+              r="10"
+              fill="none"
+              stroke="rgba(255,255,255,0.2)"
+              stroke-width="1"
+            />
+            <circle
+              cx="100"
+              cy="140"
+              r="20"
+              fill="none"
+              stroke="rgba(255,255,255,0.1)"
+              stroke-width="1"
+            />
+            <text
+              x="100"
+              y="155"
+              text-anchor="middle"
+              fill="rgba(255,255,255,0.04)"
+              font-family="Barlow Condensed"
+              font-size="36"
+              font-weight="800"
+            >
+              STARS
+            </text>
+          </svg>
+          <div class="explore-overlay">
+            <div class="explore-icon">⭐</div>
+            <div class="explore-title">Stars &amp; Galaxies</div>
+            <div class="explore-sub">The universe's architecture</div>
+          </div>
+        </div>
+
+        <div class="explore-card">
+          <svg
+            class="explore-bg"
+            viewBox="0 0 200 280"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <rect width="200" height="280" fill="#001a10" />
+            <ellipse
+              cx="100"
+              cy="280"
+              rx="180"
+              ry="120"
+              fill="#0a3a20"
+              opacity="0.7"
+            />
+            <rect
+              x="70"
+              y="120"
+              width="60"
+              height="80"
+              fill="#1a5a30"
+              opacity="0.5"
+              rx="2"
+            />
+            <text
+              x="100"
+              y="170"
+              text-anchor="middle"
+              fill="rgba(255,255,255,0.05)"
+              font-family="Barlow Condensed"
+              font-size="38"
+              font-weight="800"
+            >
+              EARTH
+            </text>
+          </svg>
+          <div class="explore-overlay">
+            <div class="explore-icon">🌍</div>
+            <div class="explore-title">Earth Science</div>
+            <div class="explore-sub">Climate, oceans &amp; atmosphere</div>
+          </div>
+        </div>
+
+        <div class="explore-card">
+          <svg
+            class="explore-bg"
+            viewBox="0 0 200 280"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice"
+          >
+            <rect width="200" height="280" fill="#100800" />
+            <circle cx="100" cy="100" r="70" fill="#4a2000" opacity="0.5" />
+            <line
+              x1="20"
+              y1="100"
+              x2="180"
+              y2="100"
+              stroke="#ffd60a"
+              stroke-width="1"
+              opacity="0.15"
+            />
+            <text
+              x="100"
+              y="115"
+              text-anchor="middle"
+              fill="rgba(255,255,255,0.05)"
+              font-family="Barlow Condensed"
+              font-size="36"
+              font-weight="800"
+            >
+              TECH
+            </text>
+          </svg>
+          <div class="explore-overlay">
+            <div class="explore-icon">🛰️</div>
+            <div class="explore-title">Technology</div>
+            <div class="explore-sub">Engineering the future</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter-section">
+      <div class="newsletter-inner">
+        <div class="newsletter-title">Stay on<br />mission</div>
+        <p class="newsletter-sub">
+          Get the latest NASA news, mission updates, and discoveries delivered
+          to your inbox.
+        </p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Enter your email address" />
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <div
+                class="nasa-meatball"
+                style="width: 40px; height: 40px; font-size: 11px"
+              >
+                NASA
+              </div>
+              <div class="nav-brand-text">
+                <span style="font-size: 18px">NASA</span>
+                <span>National Aeronautics and Space Administration</span>
+              </div>
+            </div>
+            <p class="footer-desc">
+              NASA explores the unknown in air and space, innovates for the
+              benefit of humanity, and inspires the world through discovery.
+            </p>
+            <div class="footer-socials">
+              <a class="social-btn" href="#">𝕏</a>
+              <a class="social-btn" href="#">▶</a>
+              <a class="social-btn" href="#">📷</a>
+              <a class="social-btn" href="#">in</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Missions</h4>
+            <ul>
+              <li><a href="#">Artemis</a></li>
+              <li><a href="#">James Webb</a></li>
+              <li><a href="#">Mars 2020</a></li>
+              <li><a href="#">Europa Clipper</a></li>
+              <li><a href="#">All Missions</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Science</h4>
+            <ul>
+              <li><a href="#">Astrophysics</a></li>
+              <li><a href="#">Heliophysics</a></li>
+              <li><a href="#">Planetary Science</a></li>
+              <li><a href="#">Earth Science</a></li>
+              <li><a href="#">Biological Science</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>About</h4>
+            <ul>
+              <li><a href="#">About NASA</a></li>
+              <li><a href="#">Centers</a></li>
+              <li><a href="#">Leadership</a></li>
+              <li><a href="#">Budget</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span class="footer-legal"
+            >© 2026 NASA. Created by Aymane with Claude Ai :)</span
+          >
+          <div class="footer-links">
+            <a href="#">Privacy</a>
+            <a href="#">Accessibility</a>
+            <a href="#">FOIA</a>
+            <a href="#">Inspector General</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
